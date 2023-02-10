@@ -1,7 +1,9 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import {Link} from 'react-router-dom'
+import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 
 function Register() {
+  const[show,setShow]=useState(false)
   return (
     <div className='flex justify-between '>
       <div className=''>
@@ -42,9 +44,12 @@ function Register() {
               <span>Password</span>
               <input type="password" placeholder='Enter your Password' name="pwd" className='border rounded-md border-gray-400 py-2 px-1 bg-gray-50'/>
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col relative'>
+              {
+                show ? <AiOutlineEyeInvisible onClick={()=>setShow(!show)} className='text-xl cursor-pointer text-gray-500 absolute right-2 top-9' /> : <AiOutlineEye onClick={()=>setShow(!show)} className='text-xl cursor-pointer text-gray-500 absolute right-4 top-9'/>
+              }
               <span>Confirm Password</span>
-              <input type="password" placeholder='Conrfirm password' name="cpwd" className='border rounded-md border-gray-400 py-2 px-1 bg-gray-50'/>
+              <input type={show ? "text":"password"} placeholder='Conrfirm password' name="cpwd" className='border rounded-md border-gray-400 py-2 px-1 bg-gray-50'/>
             </div>
           </div>
 

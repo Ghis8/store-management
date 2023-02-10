@@ -6,12 +6,12 @@ import { orderTable } from '../dummyData'
 function Stock() {
   return (
     <div className="mt-3 mx-4 bg-[#F5F5F5] h-screen">
-      <div className='flex space-x-1 items-center w-2/6 bg-white px-2 py-2 z-10'>
+      <div className='flex space-x-1 items-center border-b-2 border-gray-200 w-2/6 bg-white px-2 py-2 z-10'>
         <button className='bg-[#FFC107] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 1</button>
         <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 2</button>
         <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 3</button>
       </div>
-      <div className='bg-white mx-6 mb-2 h-4/5'>
+      <div className='bg-white rounded-md mx-6 mb-2 h-4/5'>
         <div>
             <div className='flex items-center justify-between mx-2 py-2 bg-white px-5'>
           <span className='text-2xl text-blue-600 font-bold'>In Stock</span>
@@ -33,9 +33,10 @@ function Stock() {
           </div>
         </div>
 
-        <div>
+        
           <table className='mx-4 mt-10'>
-            <tr className='border-b-2 border-gray-300'>
+            <thead className='border-b-2 border-gray-300'>
+            
               <th className='py-2 px-12 '><input type="checkbox" className='w-4 h-4'/></th>
               <th className='py-1 px-8 text-xl font-bold text-center '>Order ID</th>
               <th className='py-2 px-8 text-xl font-bold text-center '>Date</th>
@@ -44,11 +45,13 @@ function Stock() {
               <th className='py-2 px-8 text-xl font-bold text-center '>Destination</th>
               <th className='py-2 px-8 text-xl font-bold text-center '>Items</th>
               <th className='py-2 px-8 text-xl font-bold text-center '>Status</th>
-            </tr>
+            
+            </thead>
           <>
             {
               orderTable.map((item,index)=>(
-                <tr key={index} className="border-b-2 border-black">
+                <tbody key={index} className="border-b-2 border-black">
+                
                   <td className='py-2 px-12 text-center  '><input type="checkbox" className='w-4 h-4'/></td>
                   <td className='py-2 px-12 text-center  '>{item.orderId}</td>
                   <td className='py-2 px-12 text-center  '>{item.date}</td>
@@ -57,12 +60,13 @@ function Stock() {
                   <td className='py-2 px-12 text-center  '>{item.destination}</td>
                   <td className='py-2 px-12 text-center  '>{item.items}</td>
                   <td  className='text-center'><div className={item.status ==="Completed" ? 'bg-[#52B788] rounded-md py-1 text-white font-bold cursor-pointer': item.status ==='Pending' ? 'bg-[#BCE784] rounded-md py-1 text-white font-bold cursor-pointer' : item.status ==='Declined' ? 'bg-red-500 rounded-md py-1 text-white font-bold cursor-pointer': ''}>{item.status}</div></td>
-                </tr>
+                
+                </tbody>
               ))
             }
             </>
           </table>
-        </div>
+        
 
       </div>
 
