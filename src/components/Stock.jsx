@@ -5,18 +5,18 @@ import { orderTable } from '../dummyData'
 
 function Stock() {
   return (
-    <div className="mt-3 mx-4 bg-[#F5F5F5] h-screen">
-      <div className='flex space-x-1 items-center border-b-2 border-gray-200 w-2/6 bg-white px-2 py-2 z-10'>
+    <div className="mt-3 mx-4  h-screen">
+      <div className='flex space-x-1 items-center border-b-2 border-gray-200  bg-white px-2 py-2 z-10'>
         <button className='bg-[#FFC107] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 1</button>
         <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 2</button>
         <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 3</button>
       </div>
-      <div className='bg-white rounded-md mx-6 mb-2 h-4/5'>
-        <div>
-            <div className='flex items-center justify-between mx-2 py-2 bg-white px-5'>
-          <span className='text-2xl text-blue-600 font-bold'>In Stock</span>
-          <button className='px-4 py-3 font-bold text-white bg-blue-700 rounded-md '>New Stock</button>
-        </div>
+      <div className='bg-white rounded-md mx-6 mb-4 h-4/5'>
+        
+            <div className='flex items-center justify-between mt-4 mx-2 py-2 bg-white px-3'>
+              <span className='text-2xl text-blue-600 font-bold'>In Stock</span>
+              <button className='px-6 py-3 font-bold text-white bg-blue-700 rounded-md '>New Stock</button>
+            </div>
 
         <div className='mt-4 relative flex items-center mx-4 justify-between border-b-2 pb-4'>
           <div>
@@ -34,7 +34,7 @@ function Stock() {
         </div>
 
         
-          <table className='mx-4 mt-10'>
+          <table className='mx-4 mt-10 w-full'>
             <thead className='border-b-2 border-gray-300'>
             
               <th className='py-2 px-12 '><input type="checkbox" className='w-4 h-4'/></th>
@@ -75,7 +75,7 @@ function Stock() {
         
       </div>
       
-    </div>
+    
   )
 }
 

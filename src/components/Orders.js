@@ -5,7 +5,7 @@ import {SlCalender} from 'react-icons/sl'
 import { orderTable } from '../dummyData'
 function Orders() {
   return (
-    <div className='mt-4 px-3'>
+    <div className='mt-4 px-3 mx-4'>
         <div className='flex  items-center w-full justify-between border-b-2 border-gray-200 pb-4'>
             <span className='text-2xl font-bold'>Orders</span>
             <div className='flex space-x-5 items-center'>
@@ -34,7 +34,7 @@ function Orders() {
             
         </div>
         
-          <table className='mx-4 mt-10'>
+          <table className='mt-10 w-full'>
             <thead className='border-b-2 border-gray-300'>
             
               <th className='py-2 px-12 '><input type="checkbox" className='w-4 h-4'/></th>

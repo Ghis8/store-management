@@ -4,24 +4,23 @@ import Funds from './Funds'
 
 function Dashboard() {
   return (
-    <div className='bg-gray-100 flex flex-col space-y-5 -z-10 '>
-        <div className='flex items-center space-x-7 px-12 pt-6 mb-10'>
+    <div className='h-screen flex flex-col space-y-5'>
+        <div className='flex items-center justify-around px-12 pt-6 mb-10'>
             <Funds title="Revenue" amount="30,000"/>
             <Funds title="Sales Return" amount="30,000"/>
             <Funds title="Purchase" amount="30,000"/>
             <Funds title="Income" amount="30,000"/>
         </div>
-        <div className='flex justify-between px-12'>
+        <div className='flex justify-between px-20'>
             {/* <BarChart /> */}
             <div className='w-2/5 bg-white rounded-md shadow-md px-10 py-5'>
                 <span className='ml-5 font-semibold'>Top selling Products</span>
                 <div className='bg-blue-600 w-64 h-56 mt-10 rounded-full text-center mx-auto'></div>
             </div>
         </div>
-        {/* <div className='flex justify-between px-12'>
-           <div className='bg-white shadow-md rounded-md w-2/4 flex flex-col space-y-5'>
-                <span className='pl-12 border-b-2 font-bold'>stock alert</span>
-                    
+        <div className='flex justify-between px-20'>
+           <div className='bg-white shadow-black shadow-md rounded-md w-2/4 py-3 px-3 flex flex-col space-y-5'>
+                <span className='font-bold capitalize'>stock alert</span>
                         <table className='pl-12'>
                             <thead className='border border-gray-200'>
                             
@@ -44,7 +43,7 @@ function Dashboard() {
                         </table>
                     
            </div>
-            <div className='bg-white rounded-md shadow-md px-3 py-3 w-2/5'>
+            <div className='bg-white rounded-md shadow-black shadow-md px-3 py-3 w-2/5'>
                     <span className='font-bold'>Top Selling Product</span>
                     <table>
                         <thead className='font-bold flex mt-5'>
@@ -59,7 +58,7 @@ function Dashboard() {
                         </tbody>
                     </table>
             </div>
-        </div> */}
+        </div>
     </div>
   )
 }

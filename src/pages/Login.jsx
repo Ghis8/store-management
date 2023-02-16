@@ -23,8 +23,8 @@ function Login() {
 
   }
   return (
-    <div className='flex justify-between items-center mx-5'>
-      <div className='w-2/6 my-5 -mt-10 mx-4'>
+    <div className='flex justify-between mx-5'>
+      <div className='w-2/6 my-5  mx-4 '>
           <div className='bg-green-300 w-9 h-9 mb-6'></div>
           <div className='w-2/4'>
             <h1 className='text-2xl mb-3 font-bold'>Login</h1>

@@ -9,7 +9,7 @@ function Register() {
       <div className=''>
         <img src="/img/image1.png"  alt="bgImage"/>
       </div>
-      <div className='flex mt-14 flex-col space-y-4 my-5 mx-4'>
+      <div className='flex  flex-col space-y-4 my-5 mx-4'>
         <div className='bg-green-300 w-9 h-9 mb-6'></div>
         <div className='w-2/4 flex flex-col  space-y-1'>
             <h1 className='text-2xl mb-3 font-bold'>Register</h1>
