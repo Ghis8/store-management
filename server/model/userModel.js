@@ -48,7 +48,10 @@ const userSchema=mongoose.Schema({
         type:Number,
         default:null
     },
-    
+    cart:{
+        type:Array,
+        default:[]
+    },
     orders:[{type: mongoose.Schema.Types.ObjectId, ref:'Order'}]
     
 },{timestamps:true,minimize:false})

@@ -2,6 +2,7 @@ const express=require('express')
 const User=require('../model/userModel')
 const userRouter=express.Router()
 const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 //getting all available users
 userRouter.get('/users',async(req,res)=>{
@@ -29,10 +30,12 @@ userRouter.post('/user/register',async(req,res)=>{
 userRouter.post('/user/login',async(req,res)=>{
     const {email,password}=req.body
     try {
-        const user=await User.findOne({email})
+        const user=await User.findOne({email:email})
         if(!user) return res.status(400).json({message:'user with this email does not exist!'})
         const checkPassword=bcrypt.compareSync(password,user.password)
-        if(checkPassword) return res.status(200).json(user)
+        if(checkPassword){
+            const token=await jwt.sign()
+        }
         res.status(400).json({errMessage:'invalid credentials'})
     } catch (error) {
         res.status(400).json({errorMessage:error})
