@@ -4,12 +4,15 @@ import {IoMdArrowDropdown,IoMdArrowDropup} from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 
 
-function Navbar({navigation}) {
+function Navbar({title}) {
   const[menu,setMenu]=useState(false)
   const navigate=useNavigate()
   return (
     <div className='sticky flex py-3 bg-white shadow-md justify-between  w-screen px-5 z-10'>
-        <AiOutlineMenu className='text-2xl cursor-pointer'/>
+        <div className='flex items-center space-x-2'>
+          <AiOutlineMenu className='text-2xl cursor-pointer'/>
+          <span className='md:hidden'>{title}</span>
+        </div>
         <div className='flex items-center space-x-10'>
             <div className='flex items-center space-x-5'>
                 <AiOutlineSearch  className='text-xl cursor-pointer'/>

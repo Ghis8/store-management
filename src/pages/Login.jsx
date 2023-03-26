@@ -20,19 +20,28 @@ function Login() {
         const json=await fetch('http://localhost:4000/api/user/login',{
           method:'POST',
           headers:{
-            "Content-Type":'application/json'
+            Accept:"application/json",
           },
           body:JSON.stringify({
             email:values.email,
             password:values.password
           })
         })
+        const data=await json.json()
+        
         if(json.status === 200){
-          navigate('/stock')
+          
+          console.log(json)
+
+          localStorage.setItem('user',JSON.stringify(json.user))
+          navigate('/admin')
+        }else{
+          setError("Wrong credentials")
         }
-        setError("Wrong credentials")
+      }else{
+        setError("Email and password required!")
       }
-      setError("Email and password required!")
+      
       
     }catch (error) {
       console.log(error)

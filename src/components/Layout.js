@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
 function Layout({children}) {
+  const [loggedUser,setLoggedUser]=useState(null)
+  const getUser=()=>{
+    const json=localStorage.getItem('user')
+    console.log(json)
+  }
+  useEffect(()=>{
+    getUser()
+  })
+  
   return (
     <div className='w-screen h-screen overflow-x-hidden'>
         <Navbar/>

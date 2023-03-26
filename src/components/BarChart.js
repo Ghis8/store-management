@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+// import { Bar } from "react-chartjs-2";
 
 const BarChart = () => {
   const labels = ["January", "February", "March", "April", "May", "June","july","september","october","november","december"];
@@ -16,7 +16,7 @@ const BarChart = () => {
   };
   return (
     <div className="w-2/4 bg-white rounded-md shadow-md py-2 px-3">
-      <Bar data={data} />
+      {/* <Bar data={data} /> */}
     </div>
   );
 };
