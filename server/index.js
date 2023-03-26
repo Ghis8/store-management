@@ -4,14 +4,13 @@ const mongoose=require('mongoose')
 const dotenv=require('dotenv').config()
 const userRouter=require('./controller/userController')
 const app=express()
+const { isLoggedIn } = require('./middleware/middleware')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-let corsOption={
-    origin:"http://localhost:4000"
-}
-app.use(cors(corsOption))
+
+app.use(cors())
 const PORT=process.env.PORT || 8080
 mongoose.connect(process.env.MONGO_URI)
 const database=mongoose.connection

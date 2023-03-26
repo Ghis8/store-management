@@ -23,22 +23,23 @@ function Dashboard() {
                 <span className='font-bold capitalize'>stock alert</span>
                         <table className='pl-12'>
                             <thead className='border border-gray-200'>
-                            
-                                <th className='border border-gray-200 py-1 px-2'>Order ID</th>
-                                <th className='border border-gray-200 py-1 px-2'>Date</th>
-                                <th className='border border-gray-200 py-1 px-2'>Quantity</th>
-                                <th className='border border-gray-200 py-1 px-2'>Alert Amount</th>
-                                <th className='border border-gray-200 py-1 px-2'>Status</th>
+                                <tr>
+                                    <th className='border border-gray-200 py-1 px-2'>Order ID</th>
+                                    <th className='border border-gray-200 py-1 px-2'>Date</th>
+                                    <th className='border border-gray-200 py-1 px-2'>Quantity</th>
+                                    <th className='border border-gray-200 py-1 px-2'>Alert Amount</th>
+                                    <th className='border border-gray-200 py-1 px-2'>Status</th>
+                                </tr>
                             
                             </thead>
                             <tbody>
-                            
-                                <td className='border border-gray-200 py-1 px-2'>Order Id</td>
-                                <td className='border border-gray-200 py-1 px-2'>Date</td>
-                                <td className='border border-gray-200 py-1 px-2'>Quantity</td>
-                                <td className='border border-gray-200 py-1 px-2'>alert amnt</td>
-                                <td className='border border-gray-200 py-1 px-2'>status</td>
-                           
+                                <tr>
+                                    <td className='border border-gray-200 py-1 px-2'>Order Id</td>
+                                    <td className='border border-gray-200 py-1 px-2'>Date</td>
+                                    <td className='border border-gray-200 py-1 px-2'>Quantity</td>
+                                    <td className='border border-gray-200 py-1 px-2'>alert amnt</td>
+                                    <td className='border border-gray-200 py-1 px-2'>status</td>
+                                </tr>
                             </tbody>
                         </table>
                     
@@ -47,14 +48,18 @@ function Dashboard() {
                     <span className='font-bold'>Top Selling Product</span>
                     <table>
                         <thead className='font-bold flex mt-5'>
-                            <th className='border border-gray-200 py-1 px-2'>Order Id</th>
-                            <th className='border border-gray-200 py-1 px-2'>Quantity</th>
-                            <th className='border border-gray-200 py-1 px-2'>Alert Amnt</th>
+                            <tr>
+                                <th className='border border-gray-200 py-1 px-2'>Order Id</th>
+                                <th className='border border-gray-200 py-1 px-2'>Quantity</th>
+                                <th className='border border-gray-200 py-1 px-2'>Alert Amnt</th>
+                            </tr>
                         </thead>
                         <tbody className='flex'>
-                            <td className='border border-gray-200 py-1 px-2'>Order ID</td>
-                            <td className='border border-gray-200 py-1 px-2'>Qunatity</td>
-                            <td className='border border-gray-200 py-1 px-2'>Alert amnt</td>
+                            <tr>
+                                <td className='border border-gray-200 py-1 px-2'>Order ID</td>
+                                <td className='border border-gray-200 py-1 px-2'>Qunatity</td>
+                                <td className='border border-gray-200 py-1 px-2'>Alert amnt</td>
+                            </tr>
                         </tbody>
                     </table>
             </div>

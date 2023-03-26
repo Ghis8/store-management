@@ -1,8 +1,9 @@
 import React ,{useState}from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 
 function Register() {
+  const [error,setError]=useState([])
   const[show,setShow]=useState(false)
   const [values,setValues]=useState({
     first_name:'',
@@ -12,10 +13,43 @@ function Register() {
     password:'',
     cpassword:""
   })
+  const signIn=async()=>{
+    try {
+      await fetch('http://localhost:4000/api/user/register',{
+        method:'POST',
+        headers:{
+          "Content-Type":'application/json'
+        },
+        body:JSON.stringify({
+          firstName:values.first_name,
+          lastName:values.last_name,
+          email:values.email,
+          phone:values.phone,
+          password:values.password
+        })
+      }).then((res)=>{
+        alert('User created successfully!')
+        navigate('/login')
+      })
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+  const navigate=useNavigate()
   const handleSubmit=async(event)=>{
     event.preventDefault()
-    if(!values.first_name || values.last_name){
-      
+    if(!values.first_name || !values.last_name){
+      setError([...error,error.push('Enter First Name')])
+      if(!values.email)setError([...error,error.push('Email address is required')])
+      if(!values.phone) setError([...error,error.push('Phone number is required!')])
+      if(values.password.length < 8){
+        setError([...error,error.push('password must contain at least 8 characters')])
+        if(values.password !== values.cpassword) setError([...error,error.push('Password and confirm password does not match')])
+      }
+    }else{
+      setError([])
+      signIn()
     }
   }
   return (
@@ -66,9 +100,17 @@ function Register() {
               <input type={show ? "text":"password"} placeholder='Conrfirm password' name="cpassword" onChange={(e)=>setValues({...values,[e.target.name]:e.target.value})} className='border rounded-md border-gray-400 py-2 px-1 bg-gray-50'/>
             </div>
           </div>
-
+              {
+                error.length > 0 &&(
+                  error.map((item,index)=>(
+                    <div key={index} className="flex flex-col space-y-1 ">
+                      <span className='text-red-600'>*{item}</span>
+                    </div>
+                  ))
+                ) 
+              }
           <div className='flex space-x-3 items-center'>
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span>I agree to all terms,Privacy policies and fees</span>
           </div>
           <button type="submit" className='w-36 text-white bg-blue-600 rounded-md py-2'>Sign up</button>

@@ -3,6 +3,7 @@ const User=require('../model/userModel')
 const userRouter=express.Router()
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+const { isLoggedIn } = require('../middleware/middleware')
 
 //getting all available users
 userRouter.get('/users',async(req,res)=>{
@@ -19,10 +20,10 @@ userRouter.post('/user/register',async(req,res)=>{
     const {firstName,lastName,email,phone,password,role}=req.body
     try {
         const user=await User.create({firstName,lastName,email,phone,password,role})
-        res.status(201).json(user)
+        return res.status(201).json(user)
     } catch (error) {
         if(error.code ===11000) return res.status(400).json({message:"This Email address already exist!"})
-        res.status(400).send(error.message)
+        return res.status(400).send(error.message)
     }
 })
 
@@ -33,12 +34,16 @@ userRouter.post('/user/login',async(req,res)=>{
         const user=await User.findOne({email:email})
         if(!user) return res.status(400).json({message:'user with this email does not exist!'})
         const checkPassword=bcrypt.compareSync(password,user.password)
-        if(checkPassword){
-            const token=await jwt.sign()
+        if(checkPassword) {
+            const token=jwt.sign({email: user.email},process.env.SECRET)
+            res.status(200).json({token:token,user:user})
+            return true
         }
-        res.status(400).json({errMessage:'invalid credentials'})
+        return res.status(400).json({message:'invalid credentials'})
+
     } catch (error) {
-        res.status(400).json({errorMessage:error})
+        res.status(400).json({errorMjsonessage:error})
+        return false
     }
 })
 

@@ -56,28 +56,33 @@ function Sales() {
                 ):history ?(
                     <table className='text-center mt-10 border'>
                         <thead className='bg-[#E7EFF3] '>
-                            <th className='px-5 py-2'>ID</th>
-                            <th className='px-16'>Date</th>
-                            <th className='px-14'>Product</th>
-                            <th className='px-14'>Items</th>
-                            <th className='px-14'>Price</th>
-                            <th className='px-14'>Type</th>
+                            <tr>
+                                <th className='px-5 py-2'>ID</th>
+                                <th className='px-16'>Date</th>
+                                <th className='px-14'>Product</th>
+                                <th className='px-14'>Items</th>
+                                <th className='px-14'>Price</th>
+                                <th className='px-14'>Type</th>
+                            </tr>
+
                         </thead>
                         {
                             
                             historyTable.map((item,index)=>(
                                 <tbody className='py-2 border-b-2'>
-                                    <td className='py-2'>
-                                        <div className='flex justify-center items-center space-x-2'>
-                                            <span>{item.id}</span>
-                                            <AiOutlineDownload className='bg-blue-300 '/>
-                                        </div>
-                                    </td>
-                                    <td>{item.date}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.item}</td>
-                                    <td>${item.price}</td>
-                                    <td>{item.type}</td>
+                                    <tr>
+                                        <td className='py-2'>
+                                            <div className='flex justify-center items-center space-x-2'>
+                                                <span>{item.id}</span>
+                                                <AiOutlineDownload className='bg-blue-300 '/>
+                                            </div>
+                                        </td>
+                                        <td>{item.date}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.item}</td>
+                                        <td>${item.price}</td>
+                                        <td>{item.type}</td>
+                                    </tr>
                                 </tbody>
                             ))
                         }

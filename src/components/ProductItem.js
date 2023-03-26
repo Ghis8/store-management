@@ -25,16 +25,20 @@ function ProductItem() {
             nearExpiry ?(
                 <table className=' mt-10 w-3/4 text-center shadow-md'>
                     <thead className='bg-blue-200 py-5'>
-                        <th className='py-2 px-8'>Products</th>
-                        <th className='py-2 px-8'>Items</th>
-                        <th className='py-2 px-8'>Days Left</th>
+                        <tr>
+                            <th className='py-2 px-8'>Products</th>
+                            <th className='py-2 px-8'>Items</th>
+                            <th className='py-2 px-8'>Days Left</th>
+                        </tr>
                     </thead>
                     {
                         expiryProd.map((item,index)=>(
                             <tbody key={index} className="border-b-2 px-5 ">
-                                <td className='py-2 '>{item.name}</td>
-                                <td className='py-2'>{item.qt}</td>
-                                <td className='py-2'>{item.dayLeft}</td>
+                                <tr>
+                                    <td className='py-2 '>{item.name}</td>
+                                    <td className='py-2'>{item.qt}</td>
+                                    <td className='py-2'>{item.dayLeft}</td>
+                                </tr>
                             </tbody>
                         ))
                     }
@@ -71,21 +75,25 @@ function ProductItem() {
             ):(
                 <table className=' mt-10 w-4/5 text-center shadow-md'>
                     <thead className='bg-blue-200 py-5'>
-                        <th className='px-2'></th>
-                        <th className='py-2 px-8'>Products</th>
-                        <th className='py-2 px-8'>Items</th>
-                        <th className='py-2 px-8'>Price</th>
+                        <tr>
+                            <th className='px-2'></th>
+                            <th className='py-2 px-8'>Products</th>
+                            <th className='py-2 px-8'>Items</th>
+                            <th className='py-2 px-8'>Price</th>
+                        </tr>
                     </thead>
                     {
                         allProducts.map((item,index)=>(
                             <tbody key={index} className="border-b-2 px-5 ">
-                                <td className='py-2  flex items-center justify-center space-x-2'>
-                                    <MdModeEditOutline className="hover:text-blue-500"/>
-                                    <MdDelete className="hover:text-red-500"/>
-                                </td>
-                                <td className='py-2 '>{item.name}</td>
-                                <td className='py-2'>{item.qt}</td>
-                                <td className='py-2'>{item.price}</td>
+                                <tr>
+                                    <td className='py-2  flex items-center justify-center space-x-2'>
+                                        <MdModeEditOutline className="hover:text-blue-500"/>
+                                        <MdDelete className="hover:text-red-500"/>
+                                    </td>
+                                    <td className='py-2 '>{item.name}</td>
+                                    <td className='py-2'>{item.qt}</td>
+                                    <td className='py-2'>{item.price}</td>
+                                </tr>
                             </tbody>
                         ))
                     }

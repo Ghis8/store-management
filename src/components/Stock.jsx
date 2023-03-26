@@ -36,31 +36,31 @@ function Stock() {
         
           <table className='mx-4 mt-10 w-full'>
             <thead className='border-b-2 border-gray-300'>
-            
-              <th className='py-2 px-12 '><input type="checkbox" className='w-4 h-4'/></th>
-              <th className='py-1 px-8 text-xl font-bold text-center '>Order ID</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Date</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Customer</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Sale Channel</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Destination</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Items</th>
-              <th className='py-2 px-8 text-xl font-bold text-center '>Status</th>
-            
+              <tr>
+                <th className='py-2 px-12 '><input type="checkbox" className='w-4 h-4'/></th>
+                <th className='py-1 px-8 text-xl font-bold text-center '>Order ID</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Date</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Customer</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Sale Channel</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Destination</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Items</th>
+                <th className='py-2 px-8 text-xl font-bold text-center '>Status</th>
+              </tr>
             </thead>
           <>
             {
               orderTable.map((item,index)=>(
                 <tbody key={index} className="border-b-2 border-black">
-                
-                  <td className='py-2 px-12 text-center  '><input type="checkbox" className='w-4 h-4'/></td>
-                  <td className='py-2 px-12 text-center  '>{item.orderId}</td>
-                  <td className='py-2 px-12 text-center  '>{item.date}</td>
-                  <td className='py-2 px-12 text-center  '>{item.customer}</td>
-                  <td className='py-2 px-12 text-center  '>{item.salesChannel}</td>
-                  <td className='py-2 px-12 text-center  '>{item.destination}</td>
-                  <td className='py-2 px-12 text-center  '>{item.items}</td>
-                  <td  className='text-center'><div className={item.status ==="Completed" ? 'bg-[#52B788] rounded-md py-1 text-white font-bold cursor-pointer': item.status ==='Pending' ? 'bg-[#BCE784] rounded-md py-1 text-white font-bold cursor-pointer' : item.status ==='Declined' ? 'bg-red-500 rounded-md py-1 text-white font-bold cursor-pointer': ''}>{item.status}</div></td>
-                
+                  <tr>
+                    <td className='py-2 px-12 text-center  '><input type="checkbox" className='w-4 h-4'/></td>
+                    <td className='py-2 px-12 text-center  '>{item.orderId}</td>
+                    <td className='py-2 px-12 text-center  '>{item.date}</td>
+                    <td className='py-2 px-12 text-center  '>{item.customer}</td>
+                    <td className='py-2 px-12 text-center  '>{item.salesChannel}</td>
+                    <td className='py-2 px-12 text-center  '>{item.destination}</td>
+                    <td className='py-2 px-12 text-center  '>{item.items}</td>
+                    <td  className='text-center'><div className={item.status ==="Completed" ? 'bg-[#52B788] rounded-md py-1 text-white font-bold cursor-pointer': item.status ==='Pending' ? 'bg-[#BCE784] rounded-md py-1 text-white font-bold cursor-pointer' : item.status ==='Declined' ? 'bg-red-500 rounded-md py-1 text-white font-bold cursor-pointer': ''}>{item.status}</div></td>
+                  </tr>
                 </tbody>
               ))
             }
