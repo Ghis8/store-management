@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 
 
 function Sidebar() {
-  
+   
   return (
     <div className='flex flex-col space-y-5 px-8 pt-8 bg-black min-h-screen'>
         <Link to="/admin"><SideBarItem Icon={MdGridView} title="Dashboard"/></Link>

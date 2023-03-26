@@ -38,7 +38,7 @@ const userSchema=mongoose.Schema({
     },
     role:{
         type:String,
-        default:"employee"
+        default:"customer"
     },
     gender:{
         type:String,

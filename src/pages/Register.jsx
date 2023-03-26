@@ -27,7 +27,8 @@ function Register() {
           phone:values.phone,
           password:values.password
         })
-      }).then((res)=>{
+      }).then(res=>res.json())
+        .then((data)=>{
         alert('User created successfully!')
         navigate('/login')
       })

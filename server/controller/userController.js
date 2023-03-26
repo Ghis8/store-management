@@ -32,11 +32,11 @@ userRouter.post('/user/login',async(req,res)=>{
     const {email,password}=req.body
     try {
         const user=await User.findOne({email:email})
-        if(!user) return res.status(400).json({message:'user with this email does not exist!'})
+        if(!user)res.status(400).json({message:'user with this email does not exist!'})
         const checkPassword=bcrypt.compareSync(password,user.password)
         if(checkPassword) {
             const token=jwt.sign({email: user.email},process.env.SECRET)
-            res.status(200).json({token:token,user:user})
+            res.status(200).json({user:user})
             return true
         }
         return res.status(400).json({message:'invalid credentials'})

@@ -1,9 +1,18 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {SlCalender} from 'react-icons/sl'
 import { orderTable } from '../dummyData'
 function Orders() {
+  const [user,setUser]=useState(null)
+  const getUser=()=>{
+      const str=localStorage.getItem('user')
+      setUser(JSON.parse(str))
+  
+  }
+  useEffect(()=>{
+      getUser()
+  },[])
   return (
     <div className='mt-4 px-3 mx-4'>
         <div className='flex  items-center w-full justify-between border-b-2 border-gray-200 pb-4'>
@@ -33,7 +42,8 @@ function Orders() {
           </div>
             
         </div>
-        
+        {
+          (user?.role==='employee'||user?.role==='manager') &&
           <table className='mt-10 w-full'>
             <thead className='border-b-2 border-gray-300'>
               <tr>
@@ -66,6 +76,8 @@ function Orders() {
             }
             </>
           </table>
+        }
+          
         
 
     </div>

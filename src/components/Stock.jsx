@@ -1,9 +1,24 @@
-import React from 'react'
+import React ,{useState,useEffect}from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {SlCalender} from 'react-icons/sl'
+import { useNavigate } from 'react-router-dom'
 import { orderTable } from '../dummyData'
 
 function Stock() {
+  const navigate=useNavigate()
+  const [user,setUser]=useState(null)
+  const getUser=()=>{
+    const str=localStorage.getItem('user')
+    setUser(JSON.parse(str))
+  }
+    useEffect(()=>{
+        getUser()
+    },[])
+    const addProduct=()=>{
+      if(user.role==="manager"){
+        return navigate('/sales')
+      }alert("Only a manager is allowed to add a new product")
+    }
   return (
     <div className="mt-3 mx-4  h-screen">
       <div className='flex space-x-1 items-center border-b-2 border-gray-200  bg-white px-2 py-2 z-10'>
@@ -15,7 +30,7 @@ function Stock() {
         
             <div className='flex items-center justify-between mt-4 mx-2 py-2 bg-white px-3'>
               <span className='text-2xl text-blue-600 font-bold'>In Stock</span>
-              <button className='px-6 py-3 font-bold text-white bg-blue-700 rounded-md '>New Stock</button>
+              <button onClick={addProduct} className='px-6 py-3 font-bold text-white bg-blue-700 rounded-md '>New Stock</button>
             </div>
 
         <div className='mt-4 relative flex items-center mx-4 justify-between border-b-2 pb-4'>

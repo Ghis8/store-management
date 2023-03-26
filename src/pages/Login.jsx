@@ -14,35 +14,30 @@ function Login() {
   const[show,setShow]=useState(false)
   const navigate=useNavigate()
 
-  const login=async()=>{
+  const login=()=>{
     try {
       if(values.email && values.password){
-        const json=await fetch('http://localhost:4000/api/user/login',{
+         fetch('http://localhost:4000/api/user/login',{
           method:'POST',
           headers:{
-            Accept:"application/json",
+            "Content-Type":"application/json",
           },
           body:JSON.stringify({
             email:values.email,
             password:values.password
           })
-        })
-        const data=await json.json()
-        
-        if(json.status === 200){
-          
-          console.log(json)
+        }).then(res=>res.json())
+          .then(data=>{
+            if(data.user){
+              localStorage.setItem('user',JSON.stringify(data.user))
+              navigate('/admin')
+            }
+          })
+          .catch(err=>console.log(err))
 
-          localStorage.setItem('user',JSON.stringify(json.user))
-          navigate('/admin')
-        }else{
-          setError("Wrong credentials")
-        }
       }else{
         setError("Email and password required!")
       }
-      
-      
     }catch (error) {
       console.log(error)
       return false

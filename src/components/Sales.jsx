@@ -1,11 +1,19 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { historyTable } from '../dummyData'
 import {AiOutlineDownload} from 'react-icons/ai'
 
 function Sales() {
     const [sell,setSell]=useState(false)
     const [history,setHistory]=useState(false)
+    const [user,setUser]=useState(null)
+    const getUser=()=>{
+        const str=localStorage.getItem('user')
+        setUser(JSON.parse(str))
     
+    }
+    useEffect(()=>{
+        getUser()
+    },[])
   return (
     <div className='ml-10 mx-5 mt-4'>
         <span className='text-3xl font-bold'>Transactions</span>
@@ -25,7 +33,7 @@ function Sales() {
         </div>
         <div className='w-3/4 mx-auto'>
             {
-                sell ?(
+                sell && (user?.role==='employee' || user?.role==='manager') ?(
                     <div>
                         <div className='text-center flex flex-col justify-center'>
                             <span className='py-2 border-b-2 border-gray-200 font-bold text-2xl'>Sell Item</span>
@@ -53,7 +61,7 @@ function Sales() {
                             </form>
                         </div>
                     </div>
-                ):history ?(
+                ):history &&  (user?.role==='employee' || user?.role==='manager') ?(
                     <table className='text-center mt-10 border'>
                         <thead className='bg-[#E7EFF3] '>
                             <tr>
@@ -88,7 +96,7 @@ function Sales() {
                         }
                     </table>
 
-                ):
+                ):(user?.role==='manager')&&
                 <div className='text-center flex flex-col justify-center'>
                     <span className='py-2 border-b-2 border-gray-200 font-bold text-2xl'>New Item</span>
                     <form className='mt-5 flex flex-col'>

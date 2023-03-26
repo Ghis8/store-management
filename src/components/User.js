@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 
 function User() {
   const [addUser,setAddUser]=useState(false)
-  const [isAdmin,setIsAdmin]=useState(false)
+  const [user,setUser]=useState(null)
+  const getUser=()=>{
+      const str=localStorage.getItem('user')
+      setUser(JSON.parse(str))
+  
+  }
+  useEffect(()=>{
+      getUser()
+  },[])
   return (
     <div className='mt-5 mx-10'>
         <span className='font-bold text-3xl'>User</span>
@@ -13,7 +21,7 @@ function User() {
           <span onClick={()=>setAddUser(true)} className={addUser?"text-blue-300 border-b-2 border-blue-300 font-semibold cursor-pointer":'font-semibold cursor-pointer'}>New User</span>
         </div>
         {
-          addUser ?(
+          addUser && user?.role==='manager' ?(
             <div className='flex flex-col w-3/4 mx-auto'>
                 <span className='text-2xl font-bold text-center mt-5 pb-4 border-b-2'>Add Employee</span>
                 <div className='flex mt-8 justify-between mx-16'>
