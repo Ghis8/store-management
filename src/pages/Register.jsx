@@ -29,8 +29,8 @@ function Register() {
         })
       }).then(res=>res.json())
         .then((data)=>{
-        alert('User created successfully!')
-        navigate('/login')
+         alert('User created successfully!')
+         navigate('/login')
       })
     } catch (error) {
       console.log(error)

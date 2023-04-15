@@ -1,24 +1,101 @@
-import React from "react";
-// import { Bar } from "react-chartjs-2";
 
-const BarChart = () => {
-  const labels = ["January", "February", "March", "April", "May", "June","july","september","october","november","december"];
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Chart",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
-        data: [5, 10, 5, 2, 20, 30, 40,35,25,70,75],
-      },
-    ],
-  };
-  return (
-    <div className="w-2/4 bg-white rounded-md shadow-md py-2 px-3">
-      {/* <Bar data={data} /> */}
-    </div>
-  );
-};
+import * as d3 from 'd3';
+
+import React, { useRef, useEffect } from 'react';
+
+
+function BarChart({ width, height, data }){
+
+    const ref = useRef();
+
+
+    useEffect(() => {
+
+        const svg = d3.select(ref.current)
+            .attr("width", width)
+            .attr("height", height)
+            
+
+    }, []);
+
+
+    useEffect(() => {
+
+        draw();
+
+    }, [data]);
+
+
+    const draw = () => {
+        const svg = d3.select(ref.current);
+        var selection = svg.selectAll("rect").data(data);
+        var yScale = d3.scaleLinear()
+
+                            .domain([0, d3.max(data)])
+
+                            .range([0, height-100]);
+
+        selection
+
+            .transition().duration(300)
+
+                .attr("height", (d) => yScale(d))
+
+                .attr("y", (d) => height - yScale(d))
+
+
+        selection
+
+            .enter()
+
+            .append("rect")
+
+            .attr("x", (d, i) => i * 45)
+
+            .attr("y", (d) => height)
+
+            .attr("width", 40)
+
+            .attr("height", 0)
+
+            .attr("fill", "orange")
+
+            .transition().duration(300)
+
+                .attr("height", (d) => yScale(d))
+
+                .attr("y", (d) => height - yScale(d))
+
+        
+
+        selection
+
+            .exit()
+
+            .transition().duration(300)
+
+                .attr("y", (d) => height)
+
+                .attr("height", 0)
+
+            .remove()
+
+    }
+
+
+
+    return (
+
+        <div className="">
+            <svg className='rounded-md shadow-md border-none shadow-gray-200' ref={ref}></svg>
+        </div>
+
+        
+
+    )
+
+
+}
+
 
 export default BarChart;

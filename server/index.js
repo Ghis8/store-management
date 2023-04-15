@@ -5,6 +5,7 @@ const dotenv=require('dotenv').config()
 const userRouter=require('./controller/userController')
 const app=express()
 const { isLoggedIn } = require('./middleware/middleware')
+const productRouter = require('./controller/productController')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -27,6 +28,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use('/api',userRouter)
+app.use('/api',productRouter)
 
 app.listen(PORT,()=>{
     console.log(`Server running on http://localhost:${PORT}`)

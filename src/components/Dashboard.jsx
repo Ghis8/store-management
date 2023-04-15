@@ -1,8 +1,22 @@
 import React,{useEffect, useState} from 'react'
 import Funds from './Funds'
+import BarChart from './BarChart'
 
+
+const datas = [
+    [10, 30, 40, 20],
+    [10, 40, 30, 20, 50, 10],
+    [60, 30, 40, 20, 30]
+]
+var i=0
 function Dashboard() {
     const [user,setUser]=useState(null)
+    const [data,setData]=useState([])
+    const changeData = () => {
+        setData(datas[i++]);
+        if(i === datas.length) i = 0;
+    }
+
     const getUser=()=>{
         const str=localStorage.getItem('user')
         setUser(JSON.parse(str))
@@ -10,6 +24,9 @@ function Dashboard() {
     }
     useEffect(()=>{
         getUser()
+        setInterval(()=>{
+        changeData()
+        },2000)
     },[])
     
   return (
@@ -24,7 +41,7 @@ function Dashboard() {
                     <Funds title="Income" amount="30,000"/>
                 </div>
                 <div className='flex justify-between px-20'>
-                    {/* <BarChart /> */}
+                    <BarChart width={600} height={400} data={data} />
                     <div className='w-2/5 bg-white rounded-md shadow-md px-10 py-5'>
                         <span className='ml-5 font-semibold'>Top selling Products</span>
                         <div className='bg-blue-600 w-64 h-56 mt-10 rounded-full text-center mx-auto'></div>

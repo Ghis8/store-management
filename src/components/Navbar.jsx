@@ -8,7 +8,7 @@ function Navbar({title,name}) {
   const[menu,setMenu]=useState(false)
   const navigate=useNavigate()
   return (
-    <div className='sticky flex py-3 bg-white shadow-md justify-between  w-screen px-5 z-10'>
+    <div className='sticky top-0  flex py-3 bg-white shadow-md justify-between  w-screen px-5 z-10'>
         <div className='flex items-center space-x-2'>
           <AiOutlineMenu className='text-xl md:text-2xl cursor-pointer'/>
           <span className='md:hidden'>{title}</span>

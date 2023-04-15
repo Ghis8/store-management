@@ -47,7 +47,7 @@ function ProductItem() {
                                     expiryProd.map((item,index)=>(
                                         <tbody key={index} className="border-b-2 px-5 ">
                                             <tr>
-                                                <td className='py-2 '>{item.name}</td>
+                                                <td className='py-2'>{item.name}</td>
                                                 <td className='py-2'>{item.qt}</td>
                                                 <td className='py-2'>{item.dayLeft}</td>
                                             </tr>
@@ -100,7 +100,7 @@ function ProductItem() {
                                             <tr>
                                                 <td className='py-2  flex items-center justify-center space-x-2'>
                                                     <MdModeEditOutline className="hover:text-blue-500"/>
-                                                    <MdDelete className="hover:text-red-500"/>
+                                                    <MdDelete  className="hover:text-red-500"/>
                                                 </td>
                                                 <td className='py-2 '>{item.name}</td>
                                                 <td className='py-2'>{item.qt}</td>

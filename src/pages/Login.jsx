@@ -31,7 +31,7 @@ function Login() {
             if(data.user){
               localStorage.setItem('user',JSON.stringify(data.user))
               navigate('/admin')
-            }
+            }setError(data.message)
           })
           .catch(err=>console.log(err))
 
