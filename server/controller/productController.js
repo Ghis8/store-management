@@ -39,6 +39,20 @@ productRouter.get('/product/',async(req,res)=>{
     }
 })
 
+//update a product
+
+productRouter.patch('/update-product/:id',async(req,res)=>{
+    const id=req.params.id
+    const {productQuantity,productUnityPrice}=req.body
+
+    try {
+        const product=await Product.findByIdAndUpdate({_id:id},{productQuantity,productUnityPrice})
+        res.status(200).json({message:'product updated successfully',product})
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 // delete a product
 
 productRouter.delete('/deleteProduct/:id',async(req,res)=>{

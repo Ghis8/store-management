@@ -5,13 +5,34 @@ function ProductItem() {
     const [nearExpiry,setNearExpiry]=useState(false)
     const[updateProd,setUpdateProp]=useState(false)
     const [user,setUser]=useState(null)
+    const [products,setProducts]=useState(null)
+    const [val,setVal]=useState({
+        name:'',
+        mrp:0,
+        quantity:0
+    })
     const getUser=()=>{
         const str=localStorage.getItem('user')
         setUser(JSON.parse(str))
-    
     }
+    const handleUpdate=(event)=>{
+        event.preventDefault()
+        console.log(val)
+    }
+    const getProdducts=()=>{
+        try {
+            fetch('http://localhost:4000/api/products')
+                .then(data=>data.json())
+                .then(res=>setProducts(res))
+                .catch(err=>console.log(err))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(()=>{
         getUser()
+        getProdducts()
     },[])
   return (
     <>
@@ -60,10 +81,10 @@ function ProductItem() {
                                 <span className="text-2xl capitalize text-center border-b-2 font-bold">Update Product</span>
                                 <div className="flex justify-between px-10 mt-10 space-x-16">
                                     <span className="font-bold text-2xl">Product</span>
-                                    <form className="flex space-y-8 flex-col">
-                                        <input type="text" placeholder="name" className="border bg-gray-200 rounded-md w-[400px] py-2  indent-2"/>
-                                        <input type="text" placeholder="MRP" className="border rounded-md bg-gray-200 py-2  indent-2"/>
-                                        
+                                    <form className="flex space-y-8 flex-col" onSubmit={handleUpdate}>
+                                        <input type="text" placeholder="name" onChange={(text)=>setVal({...val,name:text.target.value})} className="border bg-gray-200 rounded-md w-[400px] py-2  indent-2"/>
+                                        <input type="text" placeholder="MRP" onChange={(text)=>setVal({...val,mrp:Number(text.target.value)})} className="border rounded-md bg-gray-200 py-2  indent-2"/>
+                                        <input type="text" placeholder="Quantity" onChange={(text)=>setVal({...val,quantity:Number(text.target.value)})} className="border rounded-md bg-gray-200 py-2  indent-2"/>                                        
                                         <div className="-mt-5">
                                             <span className="text-xl capitalize">type</span>
                                             <div className="mt-3 flex space-x-16">
@@ -95,16 +116,16 @@ function ProductItem() {
                                     </tr>
                                 </thead>
                                 {
-                                    allProducts.map((item,index)=>(
+                                    products?.map((item,index)=>(
                                         <tbody key={index} className="border-b-2 px-5 ">
                                             <tr>
                                                 <td className='py-2  flex items-center justify-center space-x-2'>
                                                     <MdModeEditOutline className="hover:text-blue-500"/>
                                                     <MdDelete  className="hover:text-red-500"/>
                                                 </td>
-                                                <td className='py-2 '>{item.name}</td>
-                                                <td className='py-2'>{item.qt}</td>
-                                                <td className='py-2'>{item.price}</td>
+                                                <td className='py-2 '>{item?.productName}</td>
+                                                <td className='py-2'>{item?.productQuantity}</td>
+                                                <td className='py-2 font-semibold'>$ {item?.productUnityPrice}</td>
                                             </tr>
                                         </tbody>
                                     ))

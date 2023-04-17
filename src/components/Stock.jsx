@@ -22,9 +22,9 @@ function Stock() {
   return (
     <div className="mt-3 mx-4  h-screen">
       <div className='flex space-x-1 items-center border-b-2 border-gray-200  bg-white px-2 py-2 z-10'>
-        <button className='bg-[#FFC107] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 1</button>
-        <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 2</button>
-        <button className='bg-[#FFDA6A] text-center px-9 py-2 rounded-t-md shadow-sm'>Category 3</button>
+        <button className='bg-[#FFC107] hover:bg-orange-200 text-center px-9 py-2 rounded-t-md shadow-sm'>Fashion</button>
+        <button className='bg-[#FFDA6A] hover:bg-orange-200 text-center px-9 py-2 rounded-t-md shadow-sm'>Electronics</button>
+        <button className='bg-[#FFDA6A] hover:bg-orange-200 text-center px-9 py-2 rounded-t-md shadow-sm'>Accessories</button>
       </div>
       <div className='bg-white rounded-md mx-6 mb-4 h-4/5'>
         
