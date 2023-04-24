@@ -19,6 +19,7 @@ function User() {
     age:0,
     user_type:''
   })
+ 
   const getUser=()=>{
       const str=localStorage.getItem('user')
       setUser(JSON.parse(str))

@@ -5,6 +5,7 @@ function ProductItem() {
     const [nearExpiry,setNearExpiry]=useState(false)
     const[updateProd,setUpdateProp]=useState(false)
     const [user,setUser]=useState(null)
+    const [selectProd,setSelectProd]=useState(null)
     const [products,setProducts]=useState(null)
     const [val,setVal]=useState({
         name:'',
@@ -30,10 +31,34 @@ function ProductItem() {
         }
     }
 
+    const deleteProduct=(id)=>{
+        const confirm=window.confirm(`Do you really want to delete This Product?`)
+        setSelectProd()
+        try {
+            
+            if(confirm == true){
+                fetch(`http://localhost:4000/api/deleteProduct/${id}`)
+                .then(res=>res.json())
+                .then(data=>alert(data.message))
+            }
+            return
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const updateProduct=(id)=>{
+        try {
+            fetch('')
+        } catch (error) {
+            
+        }
+    }
+
     useEffect(()=>{
         getUser()
         getProdducts()
     },[])
+    
   return (
     <>
         {
@@ -65,7 +90,7 @@ function ProductItem() {
                                     </tr>
                                 </thead>
                                 {
-                                    expiryProd.map((item,index)=>(
+                                    expiryProd?.map((item,index)=>(
                                         <tbody key={index} className="border-b-2 px-5 ">
                                             <tr>
                                                 <td className='py-2'>{item.name}</td>
@@ -120,8 +145,21 @@ function ProductItem() {
                                         <tbody key={index} className="border-b-2 px-5 ">
                                             <tr>
                                                 <td className='py-2  flex items-center justify-center space-x-2'>
-                                                    <MdModeEditOutline className="hover:text-blue-500"/>
-                                                    <MdDelete  className="hover:text-red-500"/>
+                                                    <MdModeEditOutline className="hover:text-blue-500 cursor-pointer"/>
+                                                    <MdDelete onClick={()=>{
+                                                        setSelectProd(item)
+                                                        const confirm=window.confirm('Do you really want to Delete This Product!')
+                                                        if(confirm){
+                                                            try {
+                                                                const del=fetch(`http://localhost:4000/api/deleteProduct/${item?._id}`)
+                                                                if(del.status==200)alert(`${item?.productName} Deleted!`)
+                                                                return
+                                                            } catch (error) {
+                                                                console.log(error)
+                                                            }  
+                                                        }
+                                                        return
+                                                    }} className="hover:text-red-500 cursor-pointer"/>
                                                 </td>
                                                 <td className='py-2 '>{item?.productName}</td>
                                                 <td className='py-2'>{item?.productQuantity}</td>

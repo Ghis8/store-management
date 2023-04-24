@@ -39,6 +39,18 @@ productRouter.get('/product/',async(req,res)=>{
     }
 })
 
+// get Category
+
+productRouter.get('/category/:name',async(req,res)=>{
+    const name=req.params.name
+    try {
+        const product=await Product.find({categoryName:name})
+        res.status(200).json({message:"Category Found",products:product})
+
+    } catch (error) {
+        res.status(400).json({message:"That Category type does not exist!"})
+    }
+})
 //update a product
 
 productRouter.patch('/update-product/:id',async(req,res)=>{
@@ -66,7 +78,7 @@ productRouter.delete('/deleteProduct/:id',async(req,res)=>{
 })
 
 // update product 
-productRouter.patch('/updateProduct',async(req,res)=>{
+productRouter.patch('/updateProduct/:id',async(req,res)=>{
     const {productQuantity,productName}=req.body
 })
 
