@@ -51,14 +51,13 @@ productRouter.get('/category/:name',async(req,res)=>{
         res.status(400).json({message:"That Category type does not exist!"})
     }
 })
-//update a product
 
+//update a product
 productRouter.patch('/update-product/:id',async(req,res)=>{
     const id=req.params.id
     const {productQuantity,productUnityPrice}=req.body
-
     try {
-        const product=await Product.findByIdAndUpdate({_id:id},{productQuantity,productUnityPrice})
+        const product=await Product.updateOne({_id:id},{$set:{productQuantity,productUnityPrice}})
         res.status(200).json({message:'product updated successfully',product})
     } catch (error) {
         res.status(400).json(error)

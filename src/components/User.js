@@ -8,6 +8,7 @@ function User() {
   const [del,setDel]=useState(false)
   const [verify,setVerify]=useState(false)
   const [err,setErr]=useState('')
+  const [userError,setUserError]=useState('')
   const [val,setVal]=useState({
     firstName:'',
     lastName:'',
@@ -18,6 +19,10 @@ function User() {
     genre:'',
     age:0,
     user_type:''
+  })
+  const [checkuser,setCheckuser]=useState({
+    email:'',
+    password:''
   })
  
   const getUser=()=>{
@@ -67,7 +72,28 @@ function User() {
     
   }
   const checkUSer=()=>{
-
+    try {
+      fetch('http://localhost:4000/api/user/check-user',{
+      method:'POST',
+      headers:{
+        "Content-Type":'application/json'
+      },
+      body:JSON.stringify({
+        email:checkuser.email,
+        password:checkuser.password
+      })
+    }).then(res=>res.json())
+      .then(data=>{
+        alert(data.message)
+        setVerify(false)
+        return true
+      })
+      .catch(err=>console.log(err))
+    } catch (error) {
+      console.log(err)
+      return false
+    }
+    
   }
 
   useEffect(()=>{
@@ -145,28 +171,41 @@ function User() {
                       <td className='py-2  flex items-center justify-center space-x-2'>
                           <MdModeEditOutline className="hover:text-blue-500"/>
                           <MdDelete onClick={()=>{
-                            setVerify(true)
-                            // fetch(`http://localhost:4000/api/user/delete-user/${item?._id}`,{
-                            //   method:"DELETE"})
+                            // setVerify(true)
+                            const confirm=window.confirm(`Do you really want to Delete ${item?.firstName} user?`)
+                            if(confirm== true){
+                              fetch(`http://localhost:4000/api/user/delete-user/${item?._id}`,{
+                              method:"DELETE"})
                               setDel(!del)
+                            }
+                            return false
                           }} className="hover:text-red-500"/>
                       </td>
                     </tr>
                   </tbody>
                 ))
               }
+              
             </table>
-           
-
           </div>
         }
-         {verify && <div className='text-center rounded-md w-2/4 border left-44 flex flex-col h-full backdrop-blur-md shadow-md bg-gray-100 py-4 space-y-4 top-20 absolute z-10'>
+         {verify && <div className='text-center rounded-md w-2/4 border left-44 flex flex-col  backdrop-blur-md shadow-md bg-gray-100 py-4 space-y-4 top-36 absolute z-10'>
             <span className='text-xl font-semibold'>User confirmation</span>
             <span className='text-gray-500'>Please Enter credentials you used to login</span>
-            <form onSubmit={checkUSer} className='flex flex-col space-y-3'> 
-              <input type='text' name="email" className='border py-1 w-2/4 rounded-md shadow-sm mx-auto indent-1 outline-none' placeholder='Email address'/>
-              <input type='password' name="password" className='py-1 rounded-md shadow-sm w-2/4 mx-auto indent-1 outline-none' placeholder='password'/>
-              <button className='py-1 px-2 bg-blue-400 w-1/4 mx-auto rounded-md ' type='submit'>confirm</button>
+            <form  className='flex flex-col space-y-3'> 
+              <input type='text' value={user?.email} onChange={(e)=>setCheckuser({...checkuser,email:e.target.value})} name="email" className='border py-1 w-2/4 rounded-md shadow-sm mx-auto indent-1 outline-none' placeholder='Email address'/>
+              <input type='password' onChange={(e)=>setCheckuser({...checkuser,password:e.target.value})} name="password" className='mb-3 py-1 rounded-md shadow-sm w-2/4 mx-auto indent-1 outline-none' placeholder='password'/>
+              {
+                userError && <span className='text-red-600'>*{userError}</span>
+              }
+              <div className='flex items-center space-x-5 w-4/5 justify-center'>
+                <button onClick={checkUSer} className='py-1 px-2 bg-blue-500 w-1/5 hover:bg-blue-400 text-white rounded-md mt-3' type='submit'>confirm</button>
+                <button onClick={(e)=>{
+                  e.preventDefault()
+                  setVerify(false)
+                  }} className='py-1 px-2 bg-red-500 w-1/5 hover:bg-red-400 text-white rounded-md mt-3' type='submit'>cancel</button>
+              </div>
+              
             </form>
           </div>}
         

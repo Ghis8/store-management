@@ -16,7 +16,7 @@ function Stock() {
   }
   const fetchProduct=()=>{
     try {
-      fetch(`http://localhost:4000/api/category/${selectedCategory}?${selectedCategory}:${categories[0]}`)
+      fetch(`http://localhost:4000/api/category/${selectedCategory}?${selectedCategory}:''`)
       .then(res=>res.json())
       .then(data=>{
         setProducts(data.products)})
@@ -72,7 +72,6 @@ function Stock() {
           <table className='mx-4 mt-10 w-full'>
             <thead className='border-b-2 border-gray-300'>
               <tr>
-                
                 <th className='py-1 px-8 md:text-sm lg:text-xl font-bold text-center '>Product Name</th>
                 <th className='py-2 px-8 md:text-sm lg:text-xl font-bold text-center '>Category Name</th>
                 <th className='py-2 px-8 md:text-sm lg:text-xl font-bold text-center '>supplier Name</th>
@@ -82,6 +81,7 @@ function Stock() {
             </thead>
           <>
             {
+              products&&
               products?.map((item,index)=>(
                 <tbody key={index} className="border-b-2 border-black">
                   <tr>
@@ -94,7 +94,12 @@ function Stock() {
                 </tbody>
               ))
             }
+            
             </>
+            {
+              
+              products?.length == 0 && <span className='text-center text-gray-600 text-xl'>No Product Available</span>
+            }
           </table>
         
 

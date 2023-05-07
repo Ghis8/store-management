@@ -46,6 +46,19 @@ userRouter.post('/user/login',async(req,res)=>{
     }
 })
 
+//check user
+userRouter.post('/user/check-user',async(req,res)=>{
+    const {email,password}=req.body
+    try {
+        const user=await User.findOne({email})
+        const checkPassword=bcrypt.compareSync(password,user.password)
+        if(checkPassword) return res.status(200).json({message:'User Confirmed'})
+        return false
+    } catch (error) {
+        console.log(error)        
+    }
+})
+
 // delete a user
 userRouter.delete('/user/delete-user/:id',async(req,res)=>{
     const userId=req.params.id
