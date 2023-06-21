@@ -26,7 +26,7 @@ function Sales() {
     const addProduct=(e)=>{
         e.preventDefault()
         if(!addProd.supplierName || !addProd.supplierPhone || !addProd.supplierAddress || !addProd.prodCategory || !addProd.prodName || addProd.prodQte ==0 || addProd.prodPrice ==0 || !addProd.prodDesc) return setErr("All form must be Filled !")
-        fetch('http://localhost:4000/api/addProduct',{
+        fetch('https://store-management-backend-v1.onrender.com/api/addProduct',{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

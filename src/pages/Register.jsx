@@ -15,7 +15,7 @@ function Register() {
   })
   const signIn=async()=>{
     try {
-      await fetch('http://localhost:4000/api/user/register',{
+      await fetch('https://store-management-backend-v1.onrender.com/api/user/register',{
         method:'POST',
         headers:{
           "Content-Type":'application/json'

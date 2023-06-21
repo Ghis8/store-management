@@ -16,7 +16,7 @@ function Stock() {
   }
   const fetchProduct=()=>{
     try {
-      fetch(`http://localhost:4000/api/category/${selectedCategory}?${selectedCategory}:''`)
+      fetch(`https://store-management-backend-v1.onrender.com/api/category/${selectedCategory}?${selectedCategory}:''`)
       .then(res=>res.json())
       .then(data=>{
         setProducts(data.products)})

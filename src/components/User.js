@@ -31,7 +31,7 @@ function User() {
   }
 
   const getUsers=()=>{
-    fetch('http://localhost:4000/api/users')
+    fetch('https://store-management-backend-v1.onrender.com/api/users')
       .then(res=>res.json())
       .then(data=>{
         setUsers(data)
@@ -46,7 +46,7 @@ function User() {
     if(val.password !== val.cpassword){
       return setErr('Password and Confirm Password does not match')
     }
-    fetch('http://localhost:4000/api/user/add-employee',{
+    fetch('https://store-management-backend-v1.onrender.com/api/user/add-employee',{
       method:'POST',
       headers:{
         "Content-Type":"application/json"
@@ -73,7 +73,7 @@ function User() {
   }
   const checkUSer=()=>{
     try {
-      fetch('http://localhost:4000/api/user/check-user',{
+      fetch('https://store-management-backend-v1.onrender.com/api/user/check-user',{
       method:'POST',
       headers:{
         "Content-Type":'application/json'
@@ -174,7 +174,7 @@ function User() {
                             // setVerify(true)
                             const confirm=window.confirm(`Do you really want to Delete ${item?.firstName} user?`)
                             if(confirm== true){
-                              fetch(`http://localhost:4000/api/user/delete-user/${item?._id}`,{
+                              fetch(`https://store-management-backend-v1.onrender.com/api/user/delete-user/${item?._id}`,{
                               method:"DELETE"})
                               setDel(!del)
                             }

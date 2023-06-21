@@ -17,7 +17,7 @@ function Login() {
   const login=()=>{
     try {
       if(values.email && values.password){
-         fetch('http://localhost:4000/api/user/login',{
+         fetch('https://store-management-backend-v1.onrender.com/api/user/login',{
           method:'POST',
           headers:{
             "Content-Type":"application/json",

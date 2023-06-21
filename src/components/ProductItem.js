@@ -21,7 +21,7 @@ function ProductItem() {
         if(val.qte === 0 && val.price === 0) return setUpdateError('You must Enter new values to the product')
         else{
             if(val.qte ===editProduct?.productQuantity)return setUpdateError('New product quantity must be different from the previous one')
-            fetch(`http://localhost:4000/api/update-product/${id}`,{
+            fetch(`https://store-management-backend-v1.onrender.com/api/update-product/${id}`,{
                 method:'PATCH',
                 headers:{
                     'Content-Type':"application/json"
@@ -45,7 +45,7 @@ function ProductItem() {
     }
     const getProdducts=()=>{
         try {
-            fetch('http://localhost:4000/api/products')
+            fetch('https://store-management-backend-v1.onrender.com/api/products')
                 .then(data=>data.json())
                 .then(res=>setProducts(res))
                 .catch(err=>console.log(err))
@@ -58,7 +58,7 @@ function ProductItem() {
         const confirm=window.confirm(`Do you really want to delete This Product?`)
         setSelectProd()
         if(confirm===true){
-            fetch(`http://localhost:4000/api/deleteProduct/${id}`,{
+            fetch(`https://store-management-backend-v1.onrender.com/api/deleteProduct/${id}`,{
                 method:'DELETE'
             })
                 .then(res=>res.json())
