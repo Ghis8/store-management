@@ -157,7 +157,7 @@ function Sales() {
                                 <option value='fashions'>Fashion</option>
                                 <option value='accessories'>Accessories</option>
                                 <option value='gifts'>Gifts</option>
-                                <option value='library'>Library</option>
+                                <option value='libraries'>Libraries</option>
                                 <option value='others'>Others</option>
                                
                             </select>
