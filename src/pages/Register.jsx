@@ -5,6 +5,7 @@ import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 function Register() {
   const [error,setError]=useState([])
   const[show,setShow]=useState(false)
+  const [createUser,setCreateUser]=useState(false)
   const [values,setValues]=useState({
     first_name:'',
     last_name:"",
@@ -29,17 +30,20 @@ function Register() {
         })
       }).then(res=>res.json())
         .then((data)=>{
-         alert('User created successfully!')
+          setCreateUser(false)
+         alert(`User ${values.first_name+" "+values.last_name} created successfully!`)
          navigate('/login')
       })
     } catch (error) {
       console.log(error)
+      setCreateUser(false)
       return false
     }
   }
   const navigate=useNavigate()
   const handleSubmit=async(event)=>{
     event.preventDefault()
+    setCreateUser(true)
     if(!values.first_name || !values.last_name){
       setError([...error,error.push('Enter First Name')])
       if(!values.email)setError([...error,error.push('Email address is required')])
@@ -114,7 +118,7 @@ function Register() {
               <input type="checkbox" />
               <span>I agree to all terms,Privacy policies and fees</span>
           </div>
-          <button type="submit" className='w-36 text-white bg-blue-600 rounded-md py-2'>Sign up</button>
+          <button disabled={createUser} type="submit" className='w-36 text-white bg-blue-600 rounded-md py-2'>{createUser ?'Creating User':"Sign up"}</button>
 
         </form>
         <div className='flex items-center space-x-2'>

@@ -8,6 +8,7 @@ function User() {
   const [del,setDel]=useState(false)
   const [verify,setVerify]=useState(false)
   const [err,setErr]=useState('')
+  const [adding,setAdding]=useState(false)
   const [userError,setUserError]=useState('')
   const [val,setVal]=useState({
     firstName:'',
@@ -39,6 +40,7 @@ function User() {
   }
   const addEmployee=(e)=>{
     e.preventDefault()
+    setAdding(true)
     if(!val.firstName && !val.lastName && !val.email && !val.password && !val.phone && !val.user_type){
       setErr('All input fields are mandatory except Genre and Age!')
       return false
@@ -63,7 +65,8 @@ function User() {
       })
     }).then(res=>res.json())
       .then(data=>{
-        alert(data.message)
+        alert(`User ${val.firstName} added!`)
+        setAdding(false)
         e.target.reset()
       })
       .catch(err=>{
@@ -141,7 +144,7 @@ function User() {
                         {
                           err && <span className='text-red-500'>*{err}</span>
                         }
-                        <button type="submit" className="bg-[#4796BD] py-2 w-2/4 rounded-full text-white font-semibold">Register</button>
+                        <button disabled={adding} type="submit" className="bg-[#4796BD] py-2 w-2/4 rounded-full text-white font-semibold">{adding? "Creating User":"Register"}</button>
                     </form>
                 </div>
             </div>
@@ -176,7 +179,11 @@ function User() {
                             if(confirm== true){
                               fetch(`https://store-management-backend-v1.onrender.com/api/user/delete-user/${item?._id}`,{
                               method:"DELETE"})
-                              setDel(!del)
+                              .then(()=>{
+                                window.location.reload(true)
+                                setDel(!del)
+                              })
+
                             }
                             return false
                           }} className="hover:text-red-500"/>

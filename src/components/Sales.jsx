@@ -7,6 +7,7 @@ function Sales() {
     const [history,setHistory]=useState(false)
     const [user,setUser]=useState(null)
     const [err,setErr]=useState('')
+    const [addingProduct,setAddingProduct]=useState(false)
     const [addProd,setAddProd]=useState({
         supplierName:'',
         supplierPhone:"",
@@ -25,6 +26,7 @@ function Sales() {
     }
     const addProduct=(e)=>{
         e.preventDefault()
+        setAddingProduct(true)
         if(!addProd.supplierName || !addProd.supplierPhone || !addProd.supplierAddress || !addProd.prodCategory || !addProd.prodName || addProd.prodQte ==0 || addProd.prodPrice ==0 || !addProd.prodDesc) return setErr("All form must be Filled !")
         fetch('https://store-management-backend-v1.onrender.com/api/addProduct',{
             method:"POST",
@@ -42,8 +44,10 @@ function Sales() {
                 productDescription:addProd.prodDesc
             })
         }).then(()=>{
-            alert('Product Added Successfully')
+            alert(`Product ${addProd.prodName} Added Successfully`)
+            setAddingProduct(false)
             e.target.reset()
+            
         })
         .catch(err=>console.log(err))
     }
@@ -173,7 +177,7 @@ function Sales() {
                         </div>
                         <span className='border border-blue-500 w-1/6 mx-auto py-2 px-4 text-blue-500'>+ add product</span>
                         
-                        <button type='submit' className='capitalize my-5 py-2 bg-[#0643f9] rounded-md w-1/6 ml-44 text-white font-bold'>save</button>
+                        <button disabled={addingProduct} type='submit' className='capitalize my-5 py-2 bg-[#0643f9] rounded-md w-1/6 ml-44 text-white font-bold'>{addingProduct? 'Adding Product':'Save'}</button>
                     </form>
                 </div>
             }

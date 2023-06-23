@@ -7,7 +7,7 @@ import { orderTable } from '../dummyData'
 function Stock() {
   const navigate=useNavigate()
   const [user,setUser]=useState(null)
-  const [selectedCategory,setSelectedCategory]=useState(null)
+  const [selectedCategory,setSelectedCategory]=useState('electronics')
   const [products,setProducts]=useState(null)
   const categories=['electronics','fashions','accessories','gifts','libraries','others']
   const getUser=()=>{
@@ -16,7 +16,15 @@ function Stock() {
   }
   const fetchProduct=()=>{
     try {
-      fetch(`https://store-management-backend-v1.onrender.com/api/category/${selectedCategory}?${selectedCategory}:''`)
+      fetch(`https://store-management-backend-v1.onrender.com/api/category`,{
+        method:'POST',
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          name:selectedCategory 
+        })
+      })
       .then(res=>res.json())
       .then(data=>{
         setProducts(data.products)})

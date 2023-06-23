@@ -1,22 +1,33 @@
-import React ,{useState}from 'react'
+import React ,{useEffect, useState}from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
+import { useLoginUserMutation } from '../redux/services/users'
 
 function Login() {
   // const responseGoogle=(res)=>{
   //   console.log(res)
   // }
+
+  //const[loginUser,{data,isLoading,isSuccess,isError}]=useLoginUserMutation()
+
   const [values,setValues]=useState({
     email:"",
     password:""
   })
+  const [loading,setLoading]=useState(false)
   const [error,setError]=useState('')
   const[show,setShow]=useState(false)
   const navigate=useNavigate()
 
-  const login=()=>{
+  const login=(e)=>{
+    e.preventDefault()
+    setLoading(true)
     try {
       if(values.email && values.password){
+        // loginUser({
+        //   email:values.email,
+        //   password:values.password
+        // })
          fetch('https://store-management-backend-v1.onrender.com/api/user/login',{
           method:'POST',
           headers:{
@@ -31,12 +42,22 @@ function Login() {
             if(data.user){
               localStorage.setItem('user',JSON.stringify(data.user))
               navigate('/admin')
-            }setError(data.message)
+              setLoading(false)
+            }else{
+              setError(data.message)
+              setLoading(false)
+            }
+            
           })
-          .catch(err=>console.log(err))
+          .catch(err=>{
+            console.log(err)
+            setLoading(false)
+          })
 
       }else{
+
         setError("Email and password required!")
+        setLoading(false)
       }
     }catch (error) {
       console.log(error)
@@ -44,12 +65,16 @@ function Login() {
     }
     
   }
+  // useEffect(()=>{
+  //   if(data && isSuccess){
+  //     localStorage.setItem('user',JSON.stringify(data.user))
+  //     navigate('/admin')
+  //   }
+  //   if(isError){
+  //     setError('Something went wrong!')
+  //   }
+  // },[data,isSuccess,isError])
   
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    login()
-    
-  }
   return (
     <div className='flex justify-between mx-5 relative'>
       <div className='w-2/6 my-5  mx-4 '>
@@ -82,7 +107,7 @@ function Login() {
               </div>
               <Link to="" className='font-bold'>forgot password ?</Link>
             </div>
-            <button type="submit" onClick={handleSubmit} className='bg-blue-600 py-2 rounded-full text-white'>Login</button>
+            <button disabled={loading}  type="submit" onClick={login} className='bg-blue-600 py-2 rounded-full text-white'>{loading? 'Loading...':'Login'}</button>
           </form>
           <span className='text-md'>Not registered yet?</span> <Link to="/register" className='font-bold text-blue-500 hover:text-blue-700'>Create account</Link>
       </div>
