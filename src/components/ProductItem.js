@@ -173,11 +173,24 @@ function ProductItem() {
                                             <tr>
                                                 <td className='py-2  flex items-center justify-center space-x-2'>
                                                     <MdModeEditOutline onClick={()=>{
-                                                        setEditProdct(item)
+                                                        if(user?.role=== 'manager'){
+                                                            setEditProdct(item)
+                                                            
+                                                        }else{
+                                                            alert('Only Manager is allowed to edit Products')
+                                                            return false
+                                                        }
+
+                                                        
                                                     }} className="hover:text-blue-500 cursor-pointer"/>
                                                     <MdDelete onClick={()=>{
-                                                        setSelectProd(item)
-                                                        deleteProduct(item?._id)
+                                                        if(user?.role==='manager'){
+                                                            setSelectProd(item)
+                                                            deleteProduct(item?._id)
+                                                        }else{
+                                                           return alert('Only Manager is allowed to delete a Product')
+                                                        }
+                                                        
                                                     }} className="hover:text-red-500 cursor-pointer"/>
                                                 </td>
                                                 <td className='py-2 '>{item?.productName}</td>
